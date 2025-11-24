@@ -1,0 +1,2245 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Основной контейнер приложения */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ⚠️ РАЗМЫТЫЙ ФОН ПРИРОДЫ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/nature-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: blur(3px) brightness(1.05); /* ⚠️ СЛАБОЕ размытие, чтобы видно было */
+  z-index: -2;
+}
+
+/* ⚠️ ЛЁГКАЯ ДЫМКА (не белая, а почти прозрачная) */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.40); /* ⚠️ Только 40% белого! */
+  z-index: -1;
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background: linear-gradient(
+    135deg,
+    rgba(47, 79, 79, 0.95) 0%,      /* Тёмно-зелёный */
+    rgba(60, 100, 60, 0.95) 100%    /* Хвойный лес */
+  );
+  backdrop-filter: blur(15px);
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.header nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.header a:hover {
+  color: #3498db;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  color: white;
+  padding: 8rem 2rem;
+  text-align: center;
+  overflow: hidden;
+  background: transparent;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero .subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Sections */
+section {
+  padding: 4rem 0;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+/* ========== КАРТОЧКИ НОМЕРОВ (ROOM CARDS) ========== */
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.room-card {
+  background: rgba(255, 255, 255, 0.95); /* ⚠️ Более плотный белый */
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15); /* ⚠️ Сильная тень */
+  transition: all 0.3s ease;
+  border: 2px solid rgba(34, 139, 34, 0.2); /* ⚠️ Зелёная рамка */
+}
+
+.room-card:hover {
+  transform: translateY(-10px) scale(1.02); /* ⚠️ Сильнее поднимается */
+  box-shadow: 0 15px 50px rgba(34, 139, 34, 0.3); /* ⚠️ Зелёная тень */
+  border-color: rgba(34, 139, 34, 0.6); /* ⚠️ Ярче рамка */
+}
+
+.room-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.room-card:hover img {
+  transform: scale(1.1); /* ⚠️ Зум фото при наведении */
+}
+
+.room-info {
+  padding: 1.5rem;
+}
+
+.room-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: #2c3e50;
+  font-weight: 700;
+}
+
+.room-info p {
+  color: #666;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.room-details {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.room-details span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.room-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid rgba(34, 139, 34, 0.2); /* ⚠️ Зелёная линия */
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #228B22; /* ⚠️ Зелёный цвет цены */
+}
+
+.room-footer .btn {
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(135deg, #228B22 0%, #4682B4 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.room-footer .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(34, 139, 34, 0.4);
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* Три фото в строке на десктопе */
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  justify-items: center;
+  align-items: start;
+}
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border: none;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Forms */
+.booking-form,
+.admin-form,
+.photo-upload {
+  max-width: 500px;
+  margin: 2rem 0;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.8rem 1.5rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #5568d3;
+}
+
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #764ba2;
+}
+
+.btn-primary:hover {
+  background: #653a8c;
+}
+
+/* Category Filter */
+.category-filter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-filter button {
+  background: #f6faf6;
+  color: #228B22;
+  font-weight: 500;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.09rem;
+  transition: all 0.19s;
+  outline: none;
+}
+
+.category-filter button.active,
+.category-filter button:hover {
+  background: #d4ecd4;
+  color: #1c551a;
+  border-color: #a9f1a9;
+  box-shadow: 0 3px 13px rgba(13, 58, 13, 0.09);
+}
+
+/* ========== FOOTER В СТИЛЕ HEADER ========== */
+
+.footer {
+  background: linear-gradient(
+    135deg,
+    rgba(47, 79, 79, 0.95) 0%,
+    rgba(60, 100, 60, 0.95) 100%
+  );
+  backdrop-filter: blur(15px);
+  color: white;
+  padding: 3rem 2rem 1rem;
+  margin-top: 3rem;
+  box-shadow: 0 -2px 15px rgba(0,0,0,0.2);
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: white;
+  font-weight: 700;
+}
+
+.footer-section h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #90EE90;
+  font-weight: 600;
+}
+
+.footer-section p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+  margin: 0.5rem 0;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.social-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+  display: inline-block;
+  position: relative;
+  padding-left: 0;
+}
+
+.social-links a::before {
+  content: '→ ';
+  opacity: 0;
+  transition: all 0.3s;
+  margin-right: 0.5rem;
+}
+
+.social-links a:hover {
+  color: #90EE90;
+  padding-left: 1rem;
+}
+
+.social-links a:hover::before {
+  opacity: 1;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-nav a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  padding-left: 0;
+}
+
+.footer-nav a::before {
+  content: '→ ';
+  opacity: 0;
+  transition: all 0.3s;
+  margin-right: 0.5rem;
+}
+
+.footer-nav a:hover {
+  color: #90EE90;
+  padding-left: 1rem;
+}
+
+.footer-nav a:hover::before {
+  opacity: 1;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* Loading & Empty States */
+.loading,
+.empty {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.2rem;
+}
+
+/* Admin Sections */
+.admin-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.preview {
+  margin: 1rem 0;
+}
+
+.preview img {
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Login Page */
+.login-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-container {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-container h1 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.login-container .subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.error-message {
+  background: #fee;
+  color: #c33;
+  padding: 0.8rem;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-hint {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.login-hint p {
+  margin: 0.3rem 0;
+}
+
+/* Header Auth */
+.header .user-name {
+  color: white;
+  margin: 0 1rem;
+}
+
+.header .btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Admin Room Selector */
+.room-selector {
+  margin-bottom: 2rem;
+}
+
+.room-selector label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.room-selector select {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* Photo Upload Section */
+.photo-upload-section {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.existing-photos {
+  margin-top: 2rem;
+}
+
+.existing-photos h4 {
+  margin-bottom: 1rem;
+}
+
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.photo-item-small {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+}
+
+.photo-item-small img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* Category Uploads */
+.category-uploads {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.category-uploads > div {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+}
+
+/* Компактные красивые заголовки */
+.rooms-page h1,
+.gallery-page h1,
+.admin-page h1:first-of-type {
+  background: linear-gradient(135deg, rgba(34, 139, 34, 0.85) 0%, rgba(70, 130, 180, 0.85) 100%);
+  color: white;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  margin: 1rem auto 2rem;
+  max-width: 600px;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  border: 2px solid rgba(255, 255, 255, 1.5);
+}
+
+/* Форма по центру */
+.admin-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+
+/* Rooms List */
+.rooms-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.room-item {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.room-item h3 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.room-item p {
+  margin: 0.3rem 0;
+  color: #666;
+}
+
+.hero {
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem 3rem 1rem;
+  background: none;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.hero-content {
+  background: linear-gradient(135deg, rgba(34,139,34,0.88) 0%, rgba(70,130,180,0.85) 100%);
+  width: 84vw;            /* чуть шире на ПК */
+  max-width: 1100px;
+  min-width: 320px;
+  margin: 0 auto;
+  border-radius: 32px;
+  box-shadow: 0 8px 35px rgba(0,0,0,0.25);
+  padding: 2.7rem 2rem 2.3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-content h1 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.hero-content p,
+.hero-content .subtitle {
+  font-size: 1.17rem;
+  margin-bottom: 1.1rem;
+  opacity: 0.95;
+}
+
+.btn-hero {
+  margin-top: 1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.09rem;
+  background: white;
+  color: #228B22;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.btn-hero:hover {
+  background: #228B22;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 900px) {
+  .hero-content {
+    width: 96vw;
+    border-radius: 22px;
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-content {
+    width: 98vw;
+    border-radius: 18px;     /* Оставляем скругление на мобиле */
+    padding: 1.2rem 0.6rem;
+  }
+}
+
+
+.btn-hero:hover {
+  background: #228B22; /* ⚠️ Зелёный фон при наведении */
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #228B22 0%, #4682B4 100%);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1a6b1a 0%, #357ABD 100%);
+  transform: translateY(-2px);
+}
+
+.btn-large {
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  background: white;
+  color: #228B22; /* Зелёный текст */
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.btn-large:hover {
+  background: #228B22;
+  color: white;
+}
+
+/* About Section - центрирование */
+.about {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.80); /* ⚠️ 70% прозрачности */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.about-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem; /* ⚠️ Центрирование */
+}
+
+.about-intro h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.about-description {
+  max-width: 900px;
+  margin: 0 auto; /* ⚠️ Центрирование */
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #666;
+  text-align: justify; /* ⚠️ Выравнивание по ширине */
+}
+
+/* Features Section - центрирование */
+.features {
+  background: rgba(248, 249, 250, 0.80); /* ⚠️ 60% прозрачности */
+  backdrop-filter: blur(8px);
+  padding: 4rem 2rem;
+  margin: 3rem auto;
+  max-width: 1400px;
+  border-radius: 20px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.85); /* ⚠️ Карточки чуть плотнее */
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.features h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 0 auto 3rem; /* ⚠️ Центрирование */
+  max-width: 1200px; /* ⚠️ Ограничение ширины */
+}
+
+.feature-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.feature-card p {
+  color: #666;
+  line-height: 1.7;
+}
+
+.features-note {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #667eea15, #764ba215);
+  border-radius: 12px;
+}
+
+.features-note p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+}
+
+.ideal-for {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+}
+
+.ideal-item {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid rgba(240, 240, 240, 0.5);
+  transition: all 0.3s;
+}
+
+.ideal-for h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.ideal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto; /* ⚠️ Центрирование */
+}
+
+.ideal-item {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid #f0f0f0;
+  transition: all 0.3s;
+}
+
+.ideal-item:hover {
+  border-color: rgba(34, 139, 34, 0.6); /* ⚠️ Зелёная рамка */
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.ideal-emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.ideal-item h4 {
+  font-size: 1.2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.ideal-activities {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+/* Gallery Preview */
+.gallery-preview {
+  padding: 4rem 2rem;
+  background: rgba(250, 250, 250, 0.80);
+  backdrop-filter: blur(10px);
+  max-width: 1400px;
+  margin: 3rem auto;
+  border-radius: 20px;
+}
+
+.gallery-preview h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+.gallery-cta {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 139, 34, 0.85) 0%,      /* Зелёный */
+    rgba(70, 130, 180, 0.85) 100%    /* Синий */
+  );
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 5rem 2rem;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.cta-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+.btn-large {
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  background: white;
+  color: #667eea;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #667eea;
+  color: #667eea;
+}
+
+.btn-secondary:hover {
+  background: #667eea;
+  color: white;
+}
+
+a {
+  color: #228B22; /* Зелёные ссылки */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #4682B4; /* Синий при наведении */
+}
+
+.header nav a {
+  color: white;
+  margin: 0 1rem;
+  transition: color 0.3s;
+}
+
+.header nav a:hover {
+  color: #90EE90; /* Светло-зелёный */
+}
+
+.btn {
+  background: linear-gradient(135deg, #228B22 0%, #4682B4 100%);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #228B22; /* Зелёная рамка */
+  color: #228B22;
+}
+
+.btn-secondary:hover {
+  background: #228B22;
+  color: white;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #90EE90; /* Светло-зелёный */
+  transition: width 0.3s;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+.nav a:hover {
+  color: #90EE90;
+}
+
+.user-name {
+  color: white;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-small:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.hamburger span {
+  width: 30px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: all 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+
+/* ========== МОБИЛЬНАЯ ВЕРСИЯ ========== */
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: linear-gradient(
+      180deg,
+      rgba(47, 79, 79, 0.98) 0%,
+      rgba(60, 100, 60, 0.98) 100%
+    );
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 2rem 2rem;
+    gap: 1.5rem;
+    box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+    transition: right 0.3s ease;
+    z-index: 999;
+  }
+
+  .nav.active {
+    right: 0;
+  }
+
+  .nav a {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav a::after {
+    display: none;
+  }
+
+  .user-name {
+    margin-left: 0;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+  }
+
+  .btn-small {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========== OVERLAY ДЛЯ МОБИЛЬНОГО МЕНЮ ========== */
+
+@media (max-width: 768px) {
+  .nav.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}
+
+/* ========== ПЛАНШЕТЫ ========== */
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .nav {
+    gap: 1rem;
+  }
+
+  .nav a {
+    font-size: 0.95rem;
+  }
+
+  .logo h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ========== МОБИЛЬНАЯ ВЕРСИЯ FOOTER ========== */
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-section {
+    text-align: left;
+  }
+
+  .social-links,
+  .footer-nav {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .footer-section h4 {
+    font-size: 1rem;
+  }
+}
+
+.room-detail-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 28px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.10);
+  padding: 2.2rem 2.5rem;
+}
+.room-detail-header h1 {
+  font-size: 2.3rem;
+  margin-bottom: 1.3rem;
+  color: #234a22;
+}
+.room-detail-desc {
+  margin-bottom: 1.27rem;
+  font-size: 1.18rem;
+  color: #333;
+  background: #f4fbf2;
+  padding: 1.2rem;
+  border-radius: 18px;
+}
+.room-detail-desc h2 {
+  margin-top: 0;
+  color: #228B22;
+  font-size: 1.24rem;
+}
+.room-params {
+  margin-bottom: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+.room-amenities ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  list-style: none;
+}
+.room-amenities li {
+  background: #e9f5e2;
+  color: #228B22;
+  padding: 0.35rem 1rem;
+  border-radius: 13px;
+  font-size: 0.99rem;
+  box-shadow: 0 1px 4px rgba(34,139,34,0.08);
+}
+.room-detail-container {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  background: rgba(255,255,255,0.93);
+  border-radius: 30px;
+  box-shadow: 0 12px 36px rgba(44,62,80,0.09);
+  padding: 2.7rem 3.5rem;
+}
+
+.room-detail-header h1 {
+  font-size: 2.6rem;      /* Крупный заголовок */
+  margin-left: 1rem;
+}
+
+.room-gallery {
+  display: flex;
+  justify-content: center;     /* Центрирует содержимое по горизонтали! */
+  width: 90%;
+  margin: 2rem auto;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+
+/* Фоторамка и изображение — как раньше */
+.gallery-frame {
+  background: #f7faf7;
+  border: 2.5px solid #e5ecd5;
+  border-radius: 22px;
+  box-shadow: 0 4px 16px rgba(44,62,80,0.10);
+  padding: 8px;
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.16s, box-shadow 0.16s;
+  cursor: pointer;
+}
+
+/* Размер фото для ПК: прямоугольное */
+.gallery-image {
+  width: 330px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #fafbfa;
+  transition: transform 0.18s;
+}
+
+/* Hover-эффект */
+.gallery-frame:hover .gallery-image {
+  transform: scale(1.03) translateY(-1.5px);
+}
+
+@media (max-width: 850px) {
+  .photo-gallery {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-frame {
+    width: 97vw;
+    max-width: 97vw;
+    padding: 4px;
+    /* border-radius оставь как есть */
+  }
+  .gallery-image {
+    width: 97vw;             /* На всю ширину экрана */
+    max-width: 97vw;
+    aspect-ratio: 1 / 1;     /* Делает изображение квадратным! */
+    object-fit: cover;
+    border-radius: 13px;
+    min-height: 250px;       /* Можно чуть увеличить минимальную высоту */
+  }
+}
+
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.81);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox img {
+  max-width: 96vw;
+  max-height: 90vh;
+  border-radius: 18px;
+  box-shadow: 0 8px 36px rgba(30,80,44,0.17);
+}
+
+.close-btn {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 2.3rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.gallery-image:hover,
+.gallery-image:focus {
+  border-color: #96d296;        /* акцентная рамка при наведении */
+  box-shadow: 0 8px 26px rgba(34,139,34,0.13);
+  transform: translateY(-2px) scale(1.025);
+}
+
+.room-detail-desc {
+  font-size: 1rem;
+  color: #333;
+  background: #f4fbf2;
+  padding: 1.2rem;
+  border-radius: 22px;
+  margin-bottom: 2rem;
+}
+
+.room-detail-params {
+  display: flex;
+  justify-content: space-between;  /* Растягивает параметры по всей ширине */
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.2rem 1.5rem;
+  background: rgba(34,139,34,0.05);
+  border-radius: 18px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.room-param {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.room-icon {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+.room-label {
+  font-weight: 600;
+  color: #228B22;
+  margin-right: 0.3rem;
+}
+
+.room-value {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Для мобильных — делаем параметры вертикальными, фото — по ширине */
+@media (max-width: 600px) {
+  .room-detail-container {
+    padding: 1rem 0.2rem;
+    border-radius: 18px;
+  }
+  .room-detail-params {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 0.7rem 0.2rem;
+    align-items: stretch;
+  }
+  .room-param {
+    font-size: 1.17rem;
+    margin-left: 0.5rem;
+    min-width: unset;
+    justify-content: flex-start;
+  }
+  .room-icon {
+    font-size: 2.1rem;
+  }
+  .gallery-image {
+    width: 98vw;        /* Почти на всю ширину экрана! */
+    max-width: 440px;
+    height: 180px;
+    border-radius: 12px;
+    margin: 0 auto;
+  }
+}
+
+
+/* Форма бронирования */
+.booking-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(34,139,34,0.04);
+  border-radius: 18px;
+}
+
+.booking-section h2 {
+  margin-bottom: 1rem;
+  color: #228B22;
+}
+
+/* Удобства в карточке (preview) */
+.room-amenities-preview {
+  display: flex;
+  gap: 0.4rem;
+  margin: 0.5rem 0;
+}
+
+.amenity-tag {
+  background: #e9f5e2;
+  color: #228B22;
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+/* Метаинфо в карточке */
+.room-meta {
+  display: flex;
+  gap: 1rem;
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.room-amenities-block {
+  background: #f4fbf2;
+  padding: 1.05rem 1.2rem;
+  border-radius: 18px;
+  margin-bottom: 1.5rem;
+}
+
+.room-amenities-block h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #228B22;
+  font-size: 1.22rem;
+}
+
+.amenities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.amenity-pill {
+  background: #e9f5e2;
+  color: #228B22;
+  padding: 0.4rem 1rem;
+  border-radius: 11px;
+  font-size: 1.05rem;
+}
+
+.empty-amenities {
+  color: #aaa;
+  font-size: 1.03rem;
+  margin-left: 0.2rem;
+}
+.busy-dates-tip {
+  background: #fffcee;
+  color: #e86c00;
+  border-radius: 8px;
+  padding: 0.6rem 1.1rem;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+}
+
+.busy-dates-tip ul {
+  padding-left: 1.1em;
+  margin: 0.3em 0;
+}
+
+.booking-error {
+  color: #db2828;
+  background: #fde2e2;
+  padding: 0.6rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.property-tour {
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  margin: 3rem auto;
+  max-width: 1400px;
+}
+
+.property-tour h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+@media (max-width: 700px) {
+  .property-tour {
+    margin: 1rem auto;
+  }
+  .property-tour h2 {
+    margin-top: -3rem;
+  }
+}
+
+.tour-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.tour-card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: all 0.3s;
+  border: 2px solid #e5ecd5;
+}
+
+.tour-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(34,139,34,0.15);
+  border-color: #96d296;
+}
+
+.tour-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.tour-content {
+  padding: 1.5rem;
+}
+
+.tour-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: #228B22;
+}
+
+.tour-content p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+/* ========== ГЛАВНАЯ HERO-СЕКЦИЯ ========== */
+
+.hero-main {
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
+  max-width: 1400px;
+  margin: 2rem auto;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+.hero-main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  color: #228B22;
+  margin-bottom: 0.8rem;
+  font-weight: 800;
+}
+
+.hero-subtitle {
+  font-size: 1.4rem;
+  color: #4682B4;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.8rem;
+}
+
+.hero-tags span {
+  background: linear-gradient(135deg, rgba(34,139,34,0.1), rgba(70,130,180,0.1));
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #2c3e50;
+  border: 1.5px solid rgba(34,139,34,0.2);
+}
+
+.hero-description {
+  background: rgba(34,139,34,0.06);
+  padding: 1.5rem;
+  border-radius: 18px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #228B22;
+}
+
+.hero-description p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #333;
+  margin: 0;
+}
+
+/* ⚠️ ГЛАВНАЯ КНОПКА */
+.btn-hero-main {
+  display: inline-block;
+  padding: 1.2rem 2.8rem;
+  background: linear-gradient(135deg, #228B22 0%, #4682B4 100%);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(34,139,34,0.3);
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.btn-hero-main:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 35px rgba(34,139,34,0.4);
+  background: linear-gradient(135deg, #1a6b1a 0%, #357ABD 100%);
+}
+
+/* Фото справа */
+.hero-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 22px;
+  transition: transform 0.4s;
+}
+
+.hero-image:hover img {
+  transform: scale(1.05);
+}
+
+/* ========== МОБИЛЬНАЯ HERO-SECTION КОМПАКТНО ========== */
+
+@media (max-width: 700px) {
+  /* Блок hero-main-content – фото сверху, далее текст */
+  .hero-main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+  }
+  .hero-image {
+    order: 1;
+    width: 100%;
+    margin-bottom: 0.6rem;
+  }
+  .hero-image img {
+    min-height: 185px;
+    max-height: 240px;
+    width: 100vw;
+    max-width: 410px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 15px;
+    object-fit: cover;
+  }
+
+  .hero-text {
+    order: 2;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  /* title и tags */
+  .hero-text h1 {
+    font-size: 1.32rem;
+    margin-bottom: 0.4rem;
+    margin-top: 0.1rem;
+    text-align: center;
+  }
+  .hero-subtitle {
+    display: none !important; /* Скрыть полностью */
+  }
+
+  .hero-tags {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.93rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+  }
+  .hero-tags span {
+    white-space: nowrap;
+    padding: 0.32rem 0.7rem;
+    background: linear-gradient(135deg, rgba(34,139,34,0.10), rgba(70,130,180,0.11));
+    border-radius: 9px;
+    color: #234a22;
+    border: 1px solid #e0e0e0;
+    font-size: 0.99em;
+  }
+
+  /* Только 1 строка описания в hero-description */
+  .hero-description {
+     display: none !important; /* Скрыть полностью */
+  }
+
+  /* Кнопка ниже — на всю ширину */
+  .btn-hero-main {
+    display: block;
+    width: 98vw;
+    max-width: 320px;
+    margin: 0.4rem auto 0;
+    font-size: 1.04rem;
+    padding: 0.95rem 0.2rem;
+    border-radius: 40px;
+    text-align: center;
+  }
+}
+
+/* === АДМИНКА === */
+
+.admin-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.admin-section h2 {
+  color: #228B22;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* Список броней */
+.bookings-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.booking-item {
+  background: #f8faf8;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #e5ecd5;
+  transition: all 0.2s;
+}
+
+.booking-item:hover {
+  border-color: #96d296;
+  box-shadow: 0 4px 16px rgba(34,139,34,0.12);
+}
+
+.booking-item h4 {
+  color: #228B22;
+  margin-bottom: 0.8rem;
+}
+
+.booking-item p {
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.booking-item select {
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1.5px solid #ddd;
+  font-size: 0.9rem;
+}
+
+/* Список номеров */
+.rooms-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.room-item {
+  background: #f8faf8;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid #e5ecd5;
+  transition: all 0.2s;
+}
+
+.room-item:hover {
+  border-color: #96d296;
+  box-shadow: 0 4px 16px rgba(34,139,34,0.12);
+}
+
+.room-item h3 {
+  color: #228B22;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.room-item p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Кнопки действий */
+.room-actions, .photo-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.btn-edit {
+  background: #ffd235;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-edit:hover {
+  background: #ffc107;
+  transform: translateY(-2px);
+}
+
+.btn-delete {
+  background: #fa4444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  background: #e33030;
+  transform: translateY(-2px);
+}
+
+.btn-delete-photo {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  background: #fa4444;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: all 0.2s;
+}
+
+.btn-delete-photo:hover {
+  background: #e33030;
+  transform: scale(1.1);
+}
+
+/* Модальное окно */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  animation: fadeIn 0.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-edit {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 48px rgba(44,62,80,0.2);
+  min-width: 320px;
+  width: 95vw;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-edit h3 {
+  color: #228B22;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.modal-edit form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-edit input,
+.modal-edit textarea {
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.modal-edit input:focus,
+.modal-edit textarea:focus {
+  outline: none;
+  border-color: #228B22;
+}
+
+.modal-edit textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modal-edit button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+}
+
+.modal-edit .btn-primary {
+  background: linear-gradient(135deg, #228B22, #4682B4);
+  color: white;
+}
+
+.modal-edit .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(34,139,34,0.3);
+}
+
+.modal-edit .btn-secondary {
+  background: #ddd;
+  color: #333;
+}
+
+.modal-edit .btn-secondary:hover {
+  background: #ccc;
+}
+
+/* Галерея фото */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.photo-item-small {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid #e5ecd5;
+  aspect-ratio: 1;
+  transition: all 0.2s;
+}
+
+.photo-item-small:hover {
+  border-color: #96d296;
+  box-shadow: 0 4px 16px rgba(34,139,34,0.15);
+}
+
+.photo-item-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Форма создания */
+.admin-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.admin-form input,
+.admin-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: #228B22;
+}
+
+.admin-form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.admin-form button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #228B22, #4682B4);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.admin-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34,139,34,0.3);
+}
