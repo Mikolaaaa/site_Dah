@@ -1729,6 +1729,11 @@ a:hover {
   color: #666;
   line-height: 1.7;
   font-size: 1.05rem;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  word-spacing: -0.05rem;
 }
 /* ========== ГЛАВНАЯ HERO-СЕКЦИЯ ========== */
 
