@@ -9,6 +9,13 @@ export default defineConfig({
     allowedHosts: true,
     watch: {
       usePolling: true,
+      interval: 1000,
+    },
+    open: true,
+    hmr: {
+      overlay: true,
+      // Если используешь localhost снаружи Docker
+      clientPort: 3000,
     },
     proxy: {
       '/api': {

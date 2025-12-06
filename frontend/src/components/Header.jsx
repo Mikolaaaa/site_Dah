@@ -39,7 +39,7 @@ export default function Header() {
         {/* ⚠️ Навигация с мобильным меню */}
         <nav className={`nav ${menuOpen ? 'active' : ''}`}>
           <Link to="/" onClick={closeMenu}>Главная</Link>
-          <Link to="/rooms" onClick={closeMenu}>Номера</Link>
+          <Link to="/house-tour">Комнаты дома</Link>
           <Link to="/gallery" onClick={closeMenu}>Галерея</Link>
 
           {isAuth ? (

@@ -396,22 +396,31 @@ async def update_booking_status(
     return booking
 
 
-@app.get(f"{settings.API_PREFIX}/bookings", response_model=List[BookingOut], tags=["Bookings"])
-async def get_bookings(
-        room_id: Optional[int] = None,
-        status: Optional[str] = None,
-        db: AsyncSession = Depends(get_db),
-        username: str = Depends(verify_token)  # только для админа
-):
-    query = select(Booking)
-    if room_id:
-        query = query.where(Booking.room_id == room_id)
-    if status:
-        query = query.where(Booking.status == status)
 
-    result = await db.execute(query)
-    bookings = result.scalars().all()
-    return bookings
+@app.post(f"{settings.API_PREFIX}/bookings", response_model=List[BookingOut], tags=["Bookings"])
+def create_booking(
+        booking: BookingCreate,
+        db: AsyncSession = Depends(get_db)
+):
+    # Проверка пересечений дат (для всего дома, не конкретной комнаты)
+    overlapping = db.query(models.Booking).filter(
+        models.Booking.status != "cancelled",
+        models.Booking.check_out > booking.check_in,
+        models.Booking.check_in < booking.check_out
+    ).first()
+
+    if overlapping:
+        raise HTTPException(
+            status_code=400,
+            detail="Дом уже забронирован на эти даты"
+        )
+
+    db_booking = models.Booking(**booking.dict())
+    db.add(db_booking)
+    db.commit()
+    db.refresh(db_booking)
+    return db_booking
+
 
 @app.patch(f"{settings.API_PREFIX}/bookings/{{booking_id}}", response_model=BookingOut, tags=["Bookings"])
 async def update_booking(

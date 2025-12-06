@@ -40,20 +40,20 @@ class Photo(Base):
 
 
 class Booking(Base):
-    """Модель бронирования"""
     __tablename__ = "bookings"
-    
+
     id = Column(Integer, primary_key=True, index=True)
-    room_id = Column(Integer, ForeignKey("rooms.id"), nullable=False)
+    # room_id теперь не обязательно (весь дом бронируется)
+    room_id = Column(Integer, ForeignKey("rooms.id"), nullable=True)
+
     guest_name = Column(String(100), nullable=False)
     guest_phone = Column(String(20), nullable=False)
     guest_email = Column(String(100))
     check_in = Column(DateTime, nullable=False)
     check_out = Column(DateTime, nullable=False)
-    guests_count = Column(Integer, default=1)
+    guests_count = Column(Integer)
     total_price = Column(Integer, nullable=False)
-    status = Column(String(20), default="pending")  # pending, confirmed, cancelled
+    status = Column(String(20), default="pending")
     created_at = Column(DateTime, default=datetime.utcnow)
-    
-    # Связь с номером
+
     room = relationship("Room", back_populates="bookings")

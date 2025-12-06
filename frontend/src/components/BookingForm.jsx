@@ -39,7 +39,6 @@ export default function BookingForm({ roomId, roomPrice }) {
     try {
       const bookingData = {
         ...formData,
-        room_id: roomId,
         check_in: formData.check_in,
         check_out: formData.check_out,
         guests_count: parseInt(formData.guests_count),
