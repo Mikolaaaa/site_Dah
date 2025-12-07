@@ -27,7 +27,7 @@ export default function HouseTour() {
         </div>
 
         <div className="rooms-grid">
-          {rooms.map((room) => (
+          {(rooms || []).map((room) => (
             <div className="room-card" key={room.id}>
               <div className="room-image-wrapper">
                 {room.photos && room.photos.length > 0 ? (

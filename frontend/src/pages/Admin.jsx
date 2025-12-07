@@ -143,7 +143,7 @@ export default function Admin() {
           <p>Броней пока нет</p>
         ) : (
           <div className="bookings-list">
-            {bookings.map((booking) => (
+            {(bookings || []).map((booking) => (
               <div key={booking.id} className="booking-item">
                 <h4>Бронь #{booking.id}</h4>
                 <p><strong>Гость:</strong> {booking.guest_name}</p>
@@ -228,7 +228,7 @@ export default function Admin() {
                   <div className="photos-grid">
                     {rooms
                       .find(r => r.id === selectedRoomId)
-                      ?.photos?.map((photo) => (
+                      ?.(photos|| [])?.map((photo) => (
                         <div key={photo.id} className="photo-item-small" style={{ position: "relative" }}>
                           <img
                             src={`http://localhost:8000${photo.url}`}
@@ -258,7 +258,7 @@ export default function Admin() {
       <section className="admin-section">
         <h2>Все номера</h2>
         <div className="rooms-list">
-          {rooms.map((room) => (
+          {(rooms || []).map((room) => (
             <div key={room.id} className="room-item">
               <h3>{room.name}</h3>
               <p>{room.description}</p>
@@ -400,3 +400,4 @@ export default function Admin() {
     </div>
   );
 }
+

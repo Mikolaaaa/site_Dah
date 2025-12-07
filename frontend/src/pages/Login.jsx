@@ -70,12 +70,6 @@ export default function Login() {
             {loading ? 'Вход...' : 'Войти'}
           </button>
         </form>
-
-        <div className="login-hint">
-          <p>Тестовые данные:</p>
-          <p><strong>Логин:</strong> admin</p>
-          <p><strong>Пароль:</strong> admin123</p>
-        </div>
       </div>
     </div>
   );

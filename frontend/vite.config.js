@@ -7,6 +7,12 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 3000,
+    allowedHosts: [
+      'dahovskiy-bereg.ru',
+      'www.dahovskiy-bereg.ru',
+      'localhost',
+      '185.113.139.100'
+    ],
     proxy: {
       '/api': {
         target: 'http://backend:8000',

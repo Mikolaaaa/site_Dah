@@ -27,7 +27,7 @@ export default function PhotoGallery({ category, roomId }) {
   return (
     <>
       <div className="photo-gallery">
-        {photos.map((photo) => (
+        {(photos || []).map((photo) => (
           <div
             key={photo.id}
             className="gallery-frame"

@@ -42,7 +42,7 @@ export default function Home() {
             <h2>Знакомство с гостиницей</h2>
 
             <div className="tour-grid">
-              {rooms.map((room) => (
+              {(rooms || []).map((room) => (
                   <div className="tour-card" key={room.id}>
                     <div className="tour-card-image">
                       <img
