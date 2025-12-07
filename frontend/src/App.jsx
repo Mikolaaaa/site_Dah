@@ -11,10 +11,13 @@ import Login from './pages/Login';
 import RoomDetail from './pages/RoomDetail';
 import Booking from './components/Booking';
 import './index.css';
+import ScrollToTop from './components/ScrollToTop';
+import Pricing from './pages/Pricing';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="app">
         <Header />
         <main>
@@ -25,6 +28,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/rooms/:roomId" element={<RoomDetail />} />
             <Route path="/booking" element={<Booking />} />
+            <Route path="/pricing" element={<Pricing />} />
 
             {/* Защищенный роут */}
             <Route

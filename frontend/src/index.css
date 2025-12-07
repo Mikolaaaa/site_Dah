@@ -2527,7 +2527,7 @@ a:hover {
 }
 
 .house-tour-cta {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #667eea 0%, #025013 100%);
   padding: 60px 40px;
   border-radius: 16px;
   text-align: center;
@@ -3570,10 +3570,10 @@ a:hover {
 
 /* Итоговая стоимость */
 .total-price {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 25px;
-  margin: 25px 0;
+  background: linear-gradient(135deg, #6a6a6a 0%, #025013 100%);
+  color: #ffffff;
+  padding: 3px;
+  margin: 3px 0;
   border-radius: 12px;
   text-align: center;
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
@@ -3581,12 +3581,12 @@ a:hover {
 
 .total-price p {
   margin: 8px 0;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 
 .total-price p:first-child {
   opacity: 0.9;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .total-price strong {
@@ -3660,11 +3660,11 @@ a:hover {
   }
 
   .total-price {
-    padding: 20px;
+    padding: 10px;
   }
 
   .total-price p {
-    font-size: 1rem;
+    font-size: 2rem;
   }
 
   .total-price strong {
@@ -3759,17 +3759,6 @@ a:hover {
   margin: 0 auto;
 }
 
-.booking-page h1 {
-  font-size: 3rem;
-  color: #012000;
-  text-align: center;
-  margin-bottom: 15px;
-  font-weight: 800;
-  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  letter-spacing: -0.5px;
-  background-color: #10fb00;
-}
-
 .booking-page > .container > p {
   font-size: 1.3rem;
   color: #043700;
@@ -3792,7 +3781,7 @@ a:hover {
 /* Адаптив */
 @media (max-width: 768px) {
   .booking-page {
-    padding: 40px 0 80px;
+    padding: 20px 0 80px;
   }
 
   .booking-page::before {
@@ -3801,7 +3790,7 @@ a:hover {
 
   .booking-page h1 {
     font-size: 2.2rem;
-    margin-bottom: 12px;
+    margin-bottom: 1px;
   }
 
   .booking-page > .container > p {
@@ -3818,7 +3807,7 @@ a:hover {
 
 @media (max-width: 480px) {
   .booking-page {
-    padding: 30px 0 70px;
+    padding: 20px 0 70px;
   }
 
   .booking-page::before {
@@ -3937,16 +3926,12 @@ a:hover {
 /* Заголовок с фоном */
 .booking-page h1 {
   font-size: 3rem;
-  color: white;
+  color: black;
   text-align: center;
   margin-bottom: 15px;
   font-weight: 800;
   letter-spacing: -0.5px;
   padding: 30px 40px;
-  background: linear-gradient(135deg, #667eea 0%, #025013 100%);
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .booking-page > .container > p {
@@ -4289,5 +4274,450 @@ a:hover {
   .hero-tags span {
     font-size: 0.75rem;
     padding: 0.35rem 0.7rem;
+  }
+}
+.hero-text .btn-hero-main {
+  display: inline-block;
+  margin-right: 0.75rem;
+}
+
+/* чтобы в столбик и с вертикальным отступом на мобилках */
+@media (max-width: 600px) {
+  .hero-text .btn-hero-main {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+.booking-intro {
+  background: #ffffff;            /* чисто белый фон */
+  padding: 1.5rem 1.75rem;
+  border-radius: 18px;
+  margin-bottom: 1rem;
+  text-align: center;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08); /* мягкая тень */
+}
+
+/* Заголовок */
+.booking-intro h1 {
+  margin-bottom: 0.25rem;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+/* Абзацы — поменьше и спокойнее */
+.booking-intro p {
+  margin: 0.25rem 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #111827;
+}
+
+/* Последний абзац с телефоном */
+.booking-contact-note {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+.booking-contact-note a {
+  color: #15803d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.booking-contact-note a:hover {
+  text-decoration: underline;
+}
+
+/* На мобильных чуть уменьшаем размеры */
+@media (max-width: 640px) {
+  .booking-intro {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .booking-intro h1 {
+    font-size: 1.6rem;
+  }
+
+  .booking-intro p {
+    font-size: 0.95rem;
+  }
+}
+/* ===== СТРАНИЦА ЦЕН ===== */
+
+.pricing-page {
+  padding: 2.5rem 0 3rem;
+}
+
+/* ===== HERO: текст + фото ===== */
+
+.pricing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 2.25rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pricing-hero-text {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 1.9rem 2.1rem;
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+
+.pricing-hero-text h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  color: #111827;
+}
+
+.pricing-hero-text p {
+  margin-bottom: 1.4rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #374151;
+}
+
+.pricing-hero-image img {
+  width: 100%;
+  display: block;
+  border-radius: 22px;
+  object-fit: cover;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.25);
+}
+
+/* Кнопка как на главной */
+
+.btn-hero-main {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.7rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #0ea5e9);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+.btn-hero-main:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(34, 197, 94, 0.35);
+  filter: brightness(1.03);
+}
+
+/* ===== ТАБЛИЦА ТАРИФОВ ===== */
+
+.pricing-table-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.pricing-table-wrapper {
+  overflow-x: auto;
+  border-radius: 18px;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.12);
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.pricing-table thead {
+  background: #f1f5f9;
+}
+
+.pricing-table th {
+  font-weight: 600;
+  color: #111827;
+}
+
+.pricing-table tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+.pricing-table tbody td {
+  color: #111827;
+}
+
+.pricing-note {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.pricing-note a {
+  color: #15803d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.pricing-note a:hover {
+  text-decoration: underline;
+}
+
+/* ===== ГАЛЕРЕЯ ===== */
+
+.pricing-gallery {
+  margin-bottom: 2.5rem;
+}
+
+.pricing-gallery h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.pricing-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.pricing-gallery-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+}
+
+/* ===== CTA ВНИЗУ ===== */
+
+.pricing-cta {
+  text-align: center;
+  padding: 2.1rem 1rem 0;
+}
+
+.pricing-cta h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.pricing-cta p {
+  margin-bottom: 1.1rem;
+  font-size: 0.98rem;
+  color: #4b5563;
+}
+
+.btn.btn-large {
+  padding: 0.85rem 2.1rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* ===== АДАПТИВ ===== */
+
+@media (max-width: 960px) {
+  .pricing-hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .pricing-hero-image {
+    order: -1;
+  }
+
+  .pricing-hero-text {
+    padding: 1.6rem 1.8rem;
+  }
+
+  .pricing-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .pricing-page {
+    padding: 2rem 0 2.5rem;
+  }
+
+  .pricing-hero-text h1 {
+    font-size: 1.7rem;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    font-size: 0.85rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .pricing-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-hero-image img {
+    border-radius: 18px;
+  }
+}
+/* Hero — общий фон под текст+фото */
+.pricing-hero {
+  background: rgba(255, 255, 255, 0.85);  /* ← фон позади двух колонок */
+  border-radius: 24px;
+  padding: 1.5rem 1.5rem;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.16);
+}
+
+/* Таблица — сама карточка уже белая, но можно чуть оттенок */
+.pricing-table-wrapper {
+  background: rgba(255, 255, 255, 0.9);   /* фон за таблицей */
+  border-radius: 20px;
+  padding: 0.6rem;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.14);
+}
+
+/* Галерея — тоже карточка */
+.pricing-gallery {
+  background: rgba(255, 255, 255, 0.9);   /* фон за фотками */
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem 1.5rem;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.12);
+}
+
+/* Нижний CTA */
+.pricing-cta {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 1.5rem 1.5rem 2rem;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.12);
+}
+/* переопределение, например, только на странице цен */
+.pricing-page section {
+  padding: 1.5rem 1rem;
+}
+.pricing-hero-text {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 1.9rem 2.1rem;
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+
+.pricing-hero-text h1 {
+  margin-bottom: 0.8rem;
+}
+
+.pricing-hero-text p {
+  margin-bottom: 1rem;
+}
+
+/* таблица внутри блока цен */
+.pricing-table-inline {
+  margin-top: 1.25rem;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.12);
+}
+
+.pricing-table-inline table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 0.9rem;
+}
+
+.pricing-table-inline th,
+.pricing-table-inline td {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+}
+
+.pricing-table-inline thead {
+  background: #f1f5f9;
+}
+
+.pricing-table-inline tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+.pricing-summary {
+  background: #ffffff;               /* белый фон только под этим блоком */
+  border-radius: 18px;               /* круглые края */
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.75rem;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);  /* лёгкая тень */
+}
+
+.pricing-summary h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+}
+
+.pricing-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem 0;
+}
+
+.pricing-summary li {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+.pricing-summary-note {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+/* Контейнер с текстом слева от карусели */
+.hero-text1 {
+  max-width: 600px;
+}
+
+/* Блок с тегами под заголовком */
+.hero-tags1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.6rem;     /* вертикальный и горизонтальный зазор */
+  justify-content: center; /* центрируем внутри hero-text */
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Сами «пилюли» */
+.hero-tags1 span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: #f1f5f9;        /* светлый фон */
+  color: #111827;
+  font-size: 0.9rem;
+  white-space: nowrap;        /* всё в одну строку */
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+/* На более узких экранах — переносим внутри тегов */
+@media (max-width: 768px) {
+  .hero-text1 {
+    max-width: 100%;
+  }
+
+  .hero-tags1 {
+    justify-content: flex-start;
+  }
+
+  .hero-tags1 span {
+    white-space: normal;      /* разрешаем перенос текста внутри */
+    text-align: center;
   }
 }

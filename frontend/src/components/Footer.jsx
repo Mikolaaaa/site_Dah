@@ -12,16 +12,15 @@ export default function Footer() {
 
         <div className="footer-section">
           <h4>Контакты</h4>
-          <p>Телефон: +7 (XXX) XXX-XX-XX</p>
-          <p>Email: info@dah-reka.ru</p>
+          <p>Телефон: +7 (918) 434-08-08</p>
+          <p>Email: -</p>
         </div>
 
         <div className="footer-section">
           <h4>Социальные сети</h4>
           <div className="social-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">VK</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Telegram</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">WhatsApp +7 (918) 434-08-08</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Telegram(скоро будет)</a>
           </div>
         </div>
       </div>

@@ -53,9 +53,9 @@ export default function Home() {
       <div className="home-page">
         <section className="hero-main">
           <div className="hero-main-content">
-            <div className="hero-text">
+            <div className="hero-text1">
               <h1>Гостиница Даховский берег</h1>
-              <div className="hero-tags">
+              <div className="hero-tags1">
                 <span>⛰️ Горы и чистая река</span>
                 <span>🔥 Барбекю-зона</span>
                 <span>🏡 Три спальни</span>
@@ -71,7 +71,10 @@ export default function Home() {
                   Всё для семейного отдыха и компаний друзей у подножия Кавказа.
                 </p>
               </div>
-              <Link to="/house-tour" className="btn-hero-main">Посмотреть комнаты →</Link>
+              <Link to="/house-tour" className="btn-hero-main">Посмотреть комнаты</Link>
+              <Link to="/booking" className="btn-hero-main">
+                Забронировать дом
+              </Link>
             </div>
             <div className="hero-image hero-carousel">
               <img

@@ -159,7 +159,6 @@ export default function BookingForm({ roomId, roomPrice }) {
       {days > 0 && (
         <div className="total-price">
           <p>Количество ночей: {days}</p>
-          <p><strong>Итого: {totalPrice.toLocaleString('ru-RU')} ₽</strong></p>
         </div>
       )}
 
