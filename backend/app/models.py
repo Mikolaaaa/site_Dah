@@ -12,6 +12,7 @@ class Room(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(100), nullable=False)
     description = Column(Text)
+    short_description = Column(String(200), nullable=True)
     price = Column(Integer, nullable=False)  # Цена за ночь
     capacity = Column(Integer, default=2)  # Количество гостей
     area = Column(Float, nullable=True)  # Площадь в м²

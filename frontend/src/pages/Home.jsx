@@ -9,8 +9,13 @@ export default function Home() {
 
   useEffect(() => {
     roomAPI.getAll()
-      .then(res => setRooms(res.data))
-      .catch(err => console.error('Error loading rooms:', err));
+      .then(res =>{
+        setRooms(Array.isArray(res.data) ? res.data : []);
+      })
+      .catch(err => {
+        console.error('Error loading rooms:', err);
+        setRooms([]);
+      });
   }, []);
   return (
       <div className="home-page">
@@ -42,7 +47,7 @@ export default function Home() {
             <h2>Знакомство с гостиницей</h2>
 
             <div className="tour-grid">
-              {(rooms || []).map((room) => (
+              {rooms.map((room) => (
                   <div className="tour-card" key={room.id}>
                     <div className="tour-card-image">
                       <img
@@ -60,7 +65,7 @@ export default function Home() {
                     </div>
                     <div className="tour-content">
                       <h3>{room.name}</h3>
-                      <p>{room.description?.substring(0, 150)}...</p>
+                      <p>{room.short_description || room.description?.substring(0, 150) + '...'}</p>
                       <Link to={`/rooms/${room.id}`} className="btn-room-detail-new">
                         <span className="btn-text">Подробнее о комнате</span>
                         <span className="btn-arrow">→</span>

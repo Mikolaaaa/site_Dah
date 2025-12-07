@@ -30,6 +30,7 @@ class PhotoOut(PhotoBase):
 class RoomBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     description: Optional[str] = None
+    short_description: Optional[str] = None
     price: int = Field(..., gt=0)
     capacity: int = Field(default=2, ge=1, le=10)
     area: Optional[float] = Field(None, gt=0)

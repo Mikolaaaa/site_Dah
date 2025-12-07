@@ -8,8 +8,13 @@ export default function HouseTour() {
 
   useEffect(() => {
     roomAPI.getAll()
-      .then(res => setRooms(res.data))
-      .catch(err => console.error(err))
+      .then(res => {
+        setRooms(Array.isArray(res.data) ? res.data : []);
+      })
+      .catch(err => {
+        console.error(err);
+        setRooms([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -27,7 +32,7 @@ export default function HouseTour() {
         </div>
 
         <div className="rooms-grid">
-          {(rooms || []).map((room) => (
+          {rooms.map((room) => (
             <div className="room-card" key={room.id}>
               <div className="room-image-wrapper">
                 {room.photos && room.photos.length > 0 ? (
@@ -39,7 +44,9 @@ export default function HouseTour() {
               </div>
               <div className="room-card-content">
                 <h3>{room.name}</h3>
-                <p>{room.description?.substring(0, 120)}...</p>
+                <p>
+                  {room.short_description || room.description?.substring(0, 120) + '...'}
+                </p>
                 <Link to={`/rooms/${room.id}`} className="btn-view-room">
                   Посмотреть подробнее →
                 </Link>
@@ -49,7 +56,7 @@ export default function HouseTour() {
         </div>
 
         <div className="house-tour-cta">
-          <h2>Готовы забронировать весь дом?</h2>
+        <h2>Готовы забронировать весь дом?</h2>
           <p>Дом сдаётся целиком. Выберите даты и забронируйте свой отдых в горах Адыгеи</p>
           <Link to="/booking" className="btn btn-large">
             Забронировать дом

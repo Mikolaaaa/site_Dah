@@ -13,9 +13,10 @@ export default function PhotoGallery({ category, roomId }) {
   const loadPhotos = async () => {
     try {
       const response = await photoAPI.getAll(category, roomId);
-      setPhotos(response.data);
+      setPhotos(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Ошибка загрузки фото:', error);
+      setPhotos([]);
     } finally {
       setLoading(false);
     }
@@ -27,7 +28,7 @@ export default function PhotoGallery({ category, roomId }) {
   return (
     <>
       <div className="photo-gallery">
-        {(photos || []).map((photo) => (
+        {photos.map((photo) => (
           <div
             key={photo.id}
             className="gallery-frame"

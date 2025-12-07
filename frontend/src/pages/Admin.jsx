@@ -6,6 +6,7 @@ export default function Admin() {
   const [roomData, setRoomData] = useState({
     name: '',
     description: '',
+    short_description: '',
     price: '',
     capacity: 2,
     area: '',
@@ -29,18 +30,20 @@ export default function Admin() {
   const loadRooms = async () => {
     try {
       const response = await roomAPI.getAll();
-      setRooms(response.data);
+      setRooms(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Ошибка загрузки номеров:', error);
+      setRooms([]);
     }
   };
 
   const loadBookings = async () => {
     try {
       const response = await bookingAPI.getAll();
-      setBookings(response.data);
+      setBookings(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Ошибка загрузки броней:', error);
+      setBookings([]);
     }
   };
 
@@ -54,6 +57,7 @@ export default function Admin() {
       await roomAPI.create({
         name: roomData.name,
         description: roomData.description,
+        short_description: roomData.short_description,
         price: parseInt(roomData.price),
         capacity: parseInt(roomData.capacity),
         area: roomData.area ? parseFloat(roomData.area) : null,
@@ -61,7 +65,7 @@ export default function Admin() {
         type: roomData.type || null,
       });
       alert('Номер создан!');
-      setRoomData({ name: '', description: '', price: '', capacity: 2, area: '', amenities: '', type: '' });
+      setRoomData({ name: '', description: '', short_description: '', price: '', capacity: 2, area: '', amenities: '', type: '' });
       loadRooms();
     } catch (error) {
       console.error('Ошибка создания номера:', error);
@@ -79,6 +83,7 @@ export default function Admin() {
     setEditingRoomData({
       name: room.name,
       description: room.description,
+      short_description: room.short_description || '',
       price: room.price,
       capacity: room.capacity,
       area: room.area || '',
@@ -96,6 +101,7 @@ export default function Admin() {
     e.preventDefault();
     await roomAPI.update(selectedRoomEdit.id, {
       ...editingRoomData,
+      short_description: editingRoomData.short_description,
       price: parseInt(editingRoomData.price),
       capacity: parseInt(editingRoomData.capacity),
       area: editingRoomData.area ? parseFloat(editingRoomData.area) : null,
@@ -143,7 +149,7 @@ export default function Admin() {
           <p>Броней пока нет</p>
         ) : (
           <div className="bookings-list">
-            {(bookings || []).map((booking) => (
+            {bookings.map((booking) => (
               <div key={booking.id} className="booking-item">
                 <h4>Бронь #{booking.id}</h4>
                 <p><strong>Гость:</strong> {booking.guest_name}</p>
@@ -228,7 +234,7 @@ export default function Admin() {
                   <div className="photos-grid">
                     {rooms
                       .find(r => r.id === selectedRoomId)
-                      ?.(photos|| [])?.map((photo) => (
+                      ?.photos?.map((photo) => (
                         <div key={photo.id} className="photo-item-small" style={{ position: "relative" }}>
                           <img
                             src={`http://localhost:8000${photo.url}`}
@@ -258,7 +264,7 @@ export default function Admin() {
       <section className="admin-section">
         <h2>Все номера</h2>
         <div className="rooms-list">
-          {(rooms || []).map((room) => (
+          {rooms.map((room) => (
             <div key={room.id} className="room-item">
               <h3>{room.name}</h3>
               <p>{room.description}</p>
@@ -283,56 +289,73 @@ export default function Admin() {
             <h3>Редактировать номер</h3>
             <form onSubmit={saveEditRoom} className="admin-form">
               <input
-                name="name"
-                value={editingRoomData.name}
-                onChange={handleEditRoomChange}
-                required
-                placeholder="Название номера"
+                  name="name"
+                  value={editingRoomData.name}
+                  onChange={handleEditRoomChange}
+                  required
+                  placeholder="Название номера"
               />
               <textarea
-                name="description"
-                value={editingRoomData.description}
-                onChange={handleEditRoomChange}
-                placeholder="Описание"
+                  name="description"
+                  value={editingRoomData.description}
+                  onChange={handleEditRoomChange}
+                  placeholder="Описание"
+              />
+              <textarea
+                  name="short_description"
+                  placeholder="Краткое описание"
+                  value={editingRoomData.short_description}
+                  onChange={handleEditRoomChange}
+                  maxLength={200}
+                  rows={2}
+              />
+              <textarea
+                  name="short_description"
+                  placeholder="Краткое описание (для главной страницы, до 200 символов)"
+                  value={roomData.short_description}
+                  onChange={handleChange}
+                  maxLength={200}
+                  rows={2}
               />
               <input
-                name="price"
-                value={editingRoomData.price}
-                type="number"
-                onChange={handleEditRoomChange}
-                required
-                placeholder="Цена за ночь"
+                  name="price"
+                  value={editingRoomData.price}
+                  type="number"
+                  onChange={handleEditRoomChange}
+                  required
+                  placeholder="Цена за ночь"
               />
               <input
-                name="capacity"
-                value={editingRoomData.capacity}
-                type="number"
-                onChange={handleEditRoomChange}
-                required
-                placeholder="Вместимость"
+                  name="capacity"
+                  value={editingRoomData.capacity}
+                  type="number"
+                  onChange={handleEditRoomChange}
+                  required
+                  placeholder="Вместимость"
               />
               <input
-                name="area"
-                value={editingRoomData.area}
-                type="number"
-                step="0.1"
-                onChange={handleEditRoomChange}
-                placeholder="Площадь (м²)"
+                  name="area"
+                  value={editingRoomData.area}
+                  type="number"
+                  step="0.1"
+                  onChange={handleEditRoomChange}
+                  placeholder="Площадь (м²)"
               />
               <input
-                name="type"
-                value={editingRoomData.type}
-                onChange={handleEditRoomChange}
-                placeholder="Тип номера"
+                  name="type"
+                  value={editingRoomData.type}
+                  onChange={handleEditRoomChange}
+                  placeholder="Тип номера"
               />
               <input
-                name="amenities"
-                value={editingRoomData.amenities}
-                onChange={handleEditRoomChange}
-                placeholder="Удобства через запятую"
+                  name="amenities"
+                  value={editingRoomData.amenities}
+                  onChange={handleEditRoomChange}
+                  placeholder="Удобства через запятую"
               />
               <button type="submit" className="btn btn-primary">Сохранить</button>
-              <button type="button" className="btn btn-secondary" onClick={() => setSelectedRoomEdit(null)}>Отмена</button>
+              <button type="button" className="btn btn-secondary" onClick={() => setSelectedRoomEdit(null)}>Отмена
+              </button>
             </form>
           </div>
         </div>
@@ -343,56 +366,64 @@ export default function Admin() {
         <h2>Создать номер</h2>
         <form onSubmit={handleSubmit} className="admin-form">
           <input
-            type="text"
-            name="name"
-            placeholder="Название номера"
-            value={roomData.name}
-            onChange={handleChange}
-            required
+              type="text"
+              name="name"
+              placeholder="Название номера"
+              value={roomData.name}
+              onChange={handleChange}
+              required
           />
           <textarea
-            name="description"
-            placeholder="Описание"
-            value={roomData.description}
-            onChange={handleChange}
+              name="description"
+              placeholder="Описание"
+              value={roomData.description}
+              onChange={handleChange}
+          />
+          <textarea
+              name="short_description"
+              placeholder="Краткое описание (для главной страницы, до 200 символов)"
+              value={roomData.short_description}
+              onChange={handleChange}
+              maxLength={200}
+              rows={2}
           />
           <input
-            type="number"
-            name="price"
-            placeholder="Цена за ночь"
-            value={roomData.price}
-            onChange={handleChange}
-            required
+              type="number"
+              name="price"
+              placeholder="Цена за ночь"
+              value={roomData.price}
+              onChange={handleChange}
+              required
           />
           <input
-            type="number"
-            name="capacity"
-            placeholder="Вместимость"
-            value={roomData.capacity}
-            onChange={handleChange}
-            required
+              type="number"
+              name="capacity"
+              placeholder="Вместимость"
+              value={roomData.capacity}
+              onChange={handleChange}
+              required
           />
           <input
-            type="number"
-            step="0.1"
-            name="area"
-            placeholder="Площадь (м²)"
-            value={roomData.area}
-            onChange={handleChange}
+              type="number"
+              step="0.1"
+              name="area"
+              placeholder="Площадь (м²)"
+              value={roomData.area}
+              onChange={handleChange}
           />
           <input
-            type="text"
-            name="type"
-            placeholder="Тип номера (Стандарт, Люкс...)"
-            value={roomData.type}
-            onChange={handleChange}
+              type="text"
+              name="type"
+              placeholder="Тип номера (Стандарт, Люкс...)"
+              value={roomData.type}
+              onChange={handleChange}
           />
           <input
-            type="text"
-            name="amenities"
-            placeholder="Удобства через запятую (Wi-Fi, Кухня, Душ)"
-            value={roomData.amenities}
-            onChange={handleChange}
+              type="text"
+              name="amenities"
+              placeholder="Удобства через запятую (Wi-Fi, Кухня, Душ)"
+              value={roomData.amenities}
+              onChange={handleChange}
           />
           <button type="submit" className="btn">Создать номер</button>
         </form>
