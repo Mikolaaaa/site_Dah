@@ -6,6 +6,15 @@ import { roomAPI } from '../api';
 
 export default function Home() {
   const [rooms, setRooms] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const heroImages = [
+    '/images/house-main.jpg',
+    '/images/main2.jpg',
+    '/images/main3.jpg',
+    '/images/main4.jpg',
+    '/images/main5.jpg'
+  ];
 
   useEffect(() => {
     roomAPI.getAll()
@@ -17,16 +26,44 @@ export default function Home() {
         setRooms([]);
       });
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        (prevIndex + 1) % heroImages.length
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      (prevIndex + 1) % heroImages.length
+    );
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? heroImages.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
       <div className="home-page">
         <section className="hero-main">
           <div className="hero-main-content">
             <div className="hero-text">
               <h1>Гостиница Даховский берег</h1>
-              <p className="hero-subtitle">Ваш уютный дом в Адыгее</p>
               <div className="hero-tags">
-                <span>📍 Станица Даховская</span>
                 <span>⛰️ Горы и чистая река</span>
+                <span>🔥 Барбекю-зона</span>
+                <span>🏡 Три спальни</span>
+                <span>🅿️ Парковка</span>
+                <span>📶 Wi-Fi</span>
+                <span>❄️ Кондиционер</span>
+                <span>🌳 10 соток участка</span>
+                <span>📍 Станица Даховская</span>
               </div>
               <div className="hero-description">
                 <p>
@@ -36,15 +73,45 @@ export default function Home() {
               </div>
               <Link to="/house-tour" className="btn-hero-main">Посмотреть комнаты →</Link>
             </div>
-            <div className="hero-image">
-              <img src="/images/house-main.jpg" alt="Гостиница Даховский берег"/>
+            <div className="hero-image hero-carousel">
+              <img
+                  src={heroImages[currentImageIndex]}
+                  alt="Гостиница Даховский берег"
+                  className="hero-carousel-image"
+              />
+              {/* Кнопки навигации */}
+              <button
+                  onClick={prevImage}
+                  className="carousel-btn carousel-btn-prev"
+                  aria-label="Previous image"
+              >
+                ←
+              </button>
+              <button
+                  onClick={nextImage}
+                  className="carousel-btn carousel-btn-next"
+                  aria-label="Next image"
+              >
+                →
+              </button>
+              {/* Точки индикаторов */}
+              <div className="carousel-indicators">
+                {heroImages.map((_, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`carousel-dot ${currentImageIndex === index ? 'active' : ''}`}
+                        aria-label={`Go to image ${index + 1}`}
+                    />
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         <section className="property-tour">
           <div className="container">
-            <h2>Знакомство с гостиницей</h2>
+            <h2>Наши комнаты и территория</h2>
 
             <div className="tour-grid">
               {rooms.map((room) => (

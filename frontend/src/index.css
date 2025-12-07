@@ -1687,6 +1687,7 @@ a:hover {
   }
   .property-tour h2 {
     margin-top: -3rem;
+    font-size: 2rem;
   }
 }
 
@@ -4083,5 +4084,210 @@ a:hover {
 
   .booking-info-footer .contact-item {
     font-size: 1rem;
+  }
+}
+/* Hero Carousel Styles */
+.hero-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn-prev {
+  left: 10px;
+}
+
+.carousel-btn-next {
+  right: 10px;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .carousel-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .carousel-btn-prev {
+    left: 5px;
+  }
+
+  .carousel-btn-next {
+    right: 5px;
+  }
+
+  .carousel-indicators {
+    bottom: 10px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+  }
+}
+/* Hero Tags - полностью переработанный вариант */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.hero-tags span {
+  background: #f0fdf4;
+  color: #15803d;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.hero-tags span:hover {
+  background: #dcfce7;
+  transform: translateY(-2px);
+}
+
+/* Убедитесь, что родительский контейнер не обрезает содержимое */
+.hero-text {
+  overflow: visible !important;
+  min-height: auto;
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .hero-tags {
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    max-width: 100%;
+  }
+
+  .hero-tags span {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    flex: 0 1 auto;
+    min-width: fit-content;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .hero-tags {
+    gap: 0.3rem;
+  }
+
+  .hero-tags span {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    flex: 0 1 auto;
+    min-width: fit-content;
+  }
+}
+/* Базово (десктоп) */
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-tags span {
+  background: #f0fdf4;
+  color: #15803d;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Все устройства ≤ 768px — допускаем перенос */
+@media (max-width: 768px) {
+  .hero-tags {
+    justify-content: flex-start;
+  }
+
+  .hero-tags span {
+    white-space: normal;
+    display: inline-block;
+    line-height: 1.2;
+  }
+}
+
+/* Очень узкие экраны ≤ 480px — делаем ещё компактнее */
+@media (max-width: 480px) {
+  .hero-tags {
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-tags span {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
   }
 }
