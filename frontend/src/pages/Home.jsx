@@ -22,7 +22,7 @@ export default function Home() {
         <section className="hero-main">
           <div className="hero-main-content">
             <div className="hero-text">
-              <h1>Гостиница Дах-Река</h1>
+              <h1>Гостиница Даховский берег</h1>
               <p className="hero-subtitle">Ваш уютный дом в Адыгее</p>
               <div className="hero-tags">
                 <span>📍 Станица Даховская</span>
@@ -37,7 +37,7 @@ export default function Home() {
               <Link to="/house-tour" className="btn-hero-main">Посмотреть номера →</Link>
             </div>
             <div className="hero-image">
-              <img src="/images/house-main.jpg" alt="Гостиница Дах-Река"/>
+              <img src="/images/house-main.jpg" alt="Гостиница Даховский берег"/>
             </div>
           </div>
         </section>

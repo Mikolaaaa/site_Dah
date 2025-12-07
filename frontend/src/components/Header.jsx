@@ -22,7 +22,7 @@ export default function Header() {
     <header className="header">
       <div className="header-container">
         <Link to="/" className="logo" onClick={closeMenu}>
-          <h1>🏔️ Дах-Река</h1>
+          <h1>🏔️ Даховский берег</h1>
         </Link>
 
         {/* ⚠️ Гамбургер кнопка */}

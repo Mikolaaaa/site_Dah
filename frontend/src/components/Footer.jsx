@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>🏔️ Гостиница Дах-Река</h3>
+          <h3>🏔️ Гостиница Даховский берег</h3>
           <p>Станица Даховская, Республика Адыгея</p>
         </div>
 
@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>© 2025 Дах-Река. Все права защищены.</p>
+        <p>© 2025 Даховский берег. Все права защищены.</p>
       </div>
     </footer>
   );

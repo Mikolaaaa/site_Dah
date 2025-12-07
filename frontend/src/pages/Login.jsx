@@ -42,7 +42,7 @@ export default function Login() {
     <div className="login-page">
       <div className="login-container">
         <h1>Вход в систему</h1>
-        <p className="subtitle">Гостиница Дах-Река</p>
+        <p className="subtitle">Гостиница Даховский берег</p>
 
         <form onSubmit={handleSubmit} className="login-form">
           {error && <div className="error-message">{error}</div>}

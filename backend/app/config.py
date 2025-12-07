@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     """Настройки приложения из .env"""
     
     # Основные
-    PROJECT_NAME: str = "Гостиница Дах-Река"
+    PROJECT_NAME: str = "Гостиница Даховский берег"
     VERSION: str = "1.0.0"
     API_PREFIX: str = "/api"
     
