@@ -41,18 +41,6 @@ export default function Header() {
           <Link to="/" onClick={closeMenu}>Главная</Link>
           <Link to="/house-tour">Комнаты дома</Link>
           <Link to="/gallery" onClick={closeMenu}>Галерея</Link>
-
-          {isAuth ? (
-            <>
-              <Link to="/admin" onClick={closeMenu}>Админ</Link>
-              <span className="user-name">👤 {user.full_name}</span>
-              <button onClick={handleLogout} className="btn btn-small">
-                Выход
-              </button>
-            </>
-          ) : (
-            <Link to="/login" onClick={closeMenu}>Вход</Link>
-          )}
         </nav>
       </div>
     </header>

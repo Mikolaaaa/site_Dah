@@ -31,8 +31,8 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 # База пользователей
 USERS = {
     "admin": {
-        "username": "admin",
-        "password": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",  # admin123
+        "username": "dahovskiy_admin",
+        "password": "7c9e6679f852e4f8e7e4d3e2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5d4c3b2a",  # Dah!Bereg#2025$Adygea
         "full_name": "Administrator"
     }
 }
