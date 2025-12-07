@@ -34,7 +34,7 @@ export default function Home() {
                   Всё для семейного отдыха и компаний друзей у подножия Кавказа.
                 </p>
               </div>
-              <Link to="/house-tour" className="btn-hero-main">Посмотреть номера →</Link>
+              <Link to="/house-tour" className="btn-hero-main">Посмотреть комнаты →</Link>
             </div>
             <div className="hero-image">
               <img src="/images/house-main.jpg" alt="Гостиница Даховский берег"/>

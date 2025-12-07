@@ -262,7 +262,7 @@ export default function Admin() {
 
       {/* ---- Список всех номеров ---- */}
       <section className="admin-section">
-        <h2>Все номера</h2>
+        <h2>Все комнаты</h2>
         <div className="rooms-list">
           {rooms.map((room) => (
             <div key={room.id} className="room-item">

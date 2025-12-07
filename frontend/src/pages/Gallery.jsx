@@ -25,7 +25,7 @@ export default function Gallery() {
           className={category === 'room' ? 'active' : ''}
           onClick={() => setCategory('room')}
         >
-          Номера
+            Комнаты
         </button>
         <button
           className={category === 'nature' ? 'active' : ''}
