@@ -13,13 +13,13 @@ export default function Footer() {
         <div className="footer-section">
           <h4>Контакты</h4>
           <p>Телефон: +7 (918) 434-08-08</p>
-          <p>Email: -</p>
+          <p>Телефон: +7 (928) 434-55-16</p>
         </div>
 
         <div className="footer-section">
           <h4>Социальные сети</h4>
           <div className="social-links">
-            <a href="#" target="_blank" rel="noopener noreferrer">WhatsApp +7 (918) 434-08-08</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">WhatsApp +7 (918) 434-08-08 или +7 (928) 434-55-16</a>
             <a href="#" target="_blank" rel="noopener noreferrer">Telegram(скоро будет)</a>
           </div>
         </div>

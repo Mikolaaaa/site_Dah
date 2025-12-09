@@ -203,7 +203,7 @@ async def get_rooms(
 
     # ⚠️ Явная загрузка photos
     result = await db.execute(
-        select(Room).options(selectinload(Room.photos))
+        select(Room).options(selectinload(Room.photos)).order_by(Room.id)
     )
     rooms = result.scalars().all()
     return rooms
