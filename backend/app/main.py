@@ -311,7 +311,6 @@ async def create_booking(
     overlapping = await db.execute(
         select(Booking)
         .where(
-            Booking.room_id == booking_data.room_id,
             Booking.status != "cancelled",
             Booking.check_out > booking_data.check_in,
             Booking.check_in < booking_data.check_out
@@ -324,12 +323,7 @@ async def create_booking(
     days = (booking_data.check_out - booking_data.check_in).days
     if days <= 0:
         raise HTTPException(400, "Некорректные даты")
-    result = await db.execute(select(Room).where(Room.id == booking_data.room_id))
-    room = result.scalar_one_or_none()
-    if not room:
-        raise HTTPException(404, "Номер не найден")
-    total_price = room.price * days
-
+    total_price = 9900 * days
     booking = Booking(
         **booking_data.dict(),
         total_price=total_price
@@ -340,42 +334,18 @@ async def create_booking(
     return booking
 
 
-
 @app.get(f"{settings.API_PREFIX}/bookings", response_model=List[BookingOut], tags=["Bookings"])
 async def get_bookings(
-    room_id: Optional[int] = None,
     db: AsyncSession = Depends(get_db)
 ):
     """Получение бронирований"""
 
     query = select(Booking)
 
-    if room_id:
-        query = query.where(Booking.room_id == room_id)
-
     result = await db.execute(query)
     bookings = result.scalars().all()
 
     return bookings
-
-@app.get(f"{settings.API_PREFIX}/rooms/{{room_id}}/booked-dates", tags=["Rooms"])
-async def get_booked_dates(room_id: int, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(
-        select(Booking)
-        .where(
-            Booking.room_id == room_id,
-            Booking.status != "cancelled"
-        )
-    )
-    bookings = result.scalars().all()
-    return [
-        {
-            "check_in": booking.check_in.strftime('%Y-%m-%d'),
-            "check_out": booking.check_out.strftime('%Y-%m-%d')
-        }
-        for booking in bookings
-    ]
-
 
 @app.patch(f"{settings.API_PREFIX}/bookings/{{booking_id}}/status", tags=["Bookings"])
 async def update_booking_status(
@@ -386,6 +356,7 @@ async def update_booking_status(
 ):
     """Изменить статус бронирования (админ)"""
     result = await db.execute(select(Booking).where(Booking.id == booking_id))
+
     booking = result.scalar_one_or_none()
     if not booking:
         raise HTTPException(404, "Бронирование не найдено")
@@ -394,32 +365,6 @@ async def update_booking_status(
     await db.commit()
     await db.refresh(booking)
     return booking
-
-
-
-@app.post(f"{settings.API_PREFIX}/bookings", response_model=List[BookingOut], tags=["Bookings"])
-def create_booking(
-        booking: BookingCreate,
-        db: AsyncSession = Depends(get_db)
-):
-    # Проверка пересечений дат (для всего дома, не конкретной комнаты)
-    overlapping = db.query(models.Booking).filter(
-        models.Booking.status != "cancelled",
-        models.Booking.check_out > booking.check_in,
-        models.Booking.check_in < booking.check_out
-    ).first()
-
-    if overlapping:
-        raise HTTPException(
-            status_code=400,
-            detail="Дом уже забронирован на эти даты"
-        )
-
-    db_booking = models.Booking(**booking.dict())
-    db.add(db_booking)
-    db.commit()
-    db.refresh(db_booking)
-    return db_booking
 
 
 @app.patch(f"{settings.API_PREFIX}/bookings/{{booking_id}}", response_model=BookingOut, tags=["Bookings"])
@@ -456,3 +401,22 @@ async def delete_booking(
     await db.delete(booking)
     await db.commit()
     return {"message": "Бронирование удалено"}
+
+
+@app.get(f"{settings.API_PREFIX}/bookings/booked-dates", tags=["Bookings"])
+async def get_booked_dates(db: AsyncSession = Depends(get_db)):
+    """Получить все занятые даты"""
+    result = await db.execute(
+        select(Booking)
+        .where(Booking.status != "cancelled")
+        .order_by(Booking.check_in)
+    )
+    bookings = result.scalars().all()
+
+    return [
+        {
+            "check_in": booking.check_in.strftime('%Y-%m-%d'),
+            "check_out": booking.check_out.strftime('%Y-%m-%d')
+        }
+        for booking in bookings
+    ]

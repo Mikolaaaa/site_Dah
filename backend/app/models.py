@@ -22,7 +22,6 @@ class Room(Base):
 
     # Связь с фото
     photos = relationship("Photo", back_populates="room", cascade="all, delete-orphan")
-    bookings = relationship("Booking", back_populates="room")
 
 
 class Photo(Base):
@@ -44,9 +43,6 @@ class Booking(Base):
     __tablename__ = "bookings"
 
     id = Column(Integer, primary_key=True, index=True)
-    # room_id теперь не обязательно (весь дом бронируется)
-    room_id = Column(Integer, ForeignKey("rooms.id"), nullable=True)
-
     guest_name = Column(String(100), nullable=False)
     guest_phone = Column(String(20), nullable=False)
     guest_email = Column(String(100))
@@ -56,5 +52,3 @@ class Booking(Base):
     total_price = Column(Integer, nullable=False)
     status = Column(String(20), default="pending")
     created_at = Column(DateTime, default=datetime.utcnow)
-
-    room = relationship("Room", back_populates="bookings")

@@ -55,6 +55,7 @@ export default function Home() {
           <div className="hero-main-content">
             <div className="hero-text1">
               <h1>Гостиница Даховский берег</h1>
+              <h3>📍 Адрес: Республика Адыгея, Майкопский район, станица Даховская, Кубанская 42</h3>
               <div className="hero-tags1">
                 <span>⛰️ Горы и чистая река</span>
                 <span>🔥 Барбекю-зона</span>
@@ -63,7 +64,6 @@ export default function Home() {
                 <span>📶 Wi-Fi</span>
                 <span>❄️ Кондиционер</span>
                 <span>🌳 10 соток участка</span>
-                <span>📍 Станица Даховская</span>
               </div>
               <div className="hero-description">
                 <p>
@@ -153,6 +153,29 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Адрес и карта */}
+        <section className="location-section">
+          <h2>Где мы находимся</h2>
+          <div className="location-content">
+            <div className="location-info">
+              <h3>📍 Адрес: Республика Адыгея, Майкопский район, станица Даховская, Кубанская 42</h3>
+              <p className="contact">
+                <strong>📞 Телефон:</strong> <a href="tel:+79184340808">+7 (918) 434-08-08</a>
+              </p>
+              <p className="contact">
+                <strong>📞 Телефон:</strong> <a href="tel:+79184340808">+7 (928) 434-55-16</a>
+              </p>
+            </div>
+            <div className="map-container">
+              <iframe
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3A607cc2515ad4d92bf7f61dae2478eb5f329143a170fe55b4f99a8c261f84fc46&amp;source=constructor"
+                  width="500" height="400" frameBorder="0">
+              </iframe>
+            </div>
+          </div>
+        </section>
+
 
         {/* Идеально для */}
         <section className="ideal-for container">

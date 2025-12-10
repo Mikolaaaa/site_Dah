@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { roomAPI, bookingAPI } from '../api';
 
-export default function BookingForm({ roomId, roomPrice }) {
+export default function BookingForm() {
   const [formData, setFormData] = useState({
     guest_name: '',
     guest_phone: '',
@@ -14,10 +14,8 @@ export default function BookingForm({ roomId, roomPrice }) {
   const [errorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    roomAPI.getBookedDates(roomId)
-      .then(res => setBookedDates(res.data))
-      .catch(() => setBookedDates([]));
-  }, [roomId]);
+    loadBookedDates();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,9 +30,41 @@ export default function BookingForm({ roomId, roomPrice }) {
     return days > 0 ? days : 0;
   };
 
+  const loadBookedDates = async () => {
+    try {
+      const response = await bookingAPI.getBookedDates();
+      setBookedDates(response.data);
+    } catch (error) {
+      console.error('Ошибка загрузки занятых дат:', error);
+    }
+  };
+
+  const isDateRangeAvailable = () => {
+    if (!formData.check_in || !formData.check_out) return true;
+
+    const checkIn = new Date(formData.check_in);
+    const checkOut = new Date(formData.check_out);
+
+    for (const period of bookedDates) {
+      const bookedIn = new Date(period.check_in);
+      const bookedOut = new Date(period.check_out);
+
+      // Проверка пересечения
+      if (checkIn < bookedOut && checkOut > bookedIn) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+
+    if (!isDateRangeAvailable()) {
+      setErrorMsg('⚠️ Выбранные даты заняты. Пожалуйста, выберите другие.');
+      return;
+    }
 
     try {
       const bookingData = {
@@ -64,7 +94,7 @@ export default function BookingForm({ roomId, roomPrice }) {
   };
 
   const days = calculateDays();
-  const totalPrice = days * roomPrice;
+  const totalPrice = days * 9900;
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
@@ -137,34 +167,52 @@ export default function BookingForm({ roomId, roomPrice }) {
         required
       />
 
-      {/* Занятые даты */}
       {bookedDates.length > 0 && (
-        <div className="busy-dates-tip">
+        <div className="busy-dates-tip" style={{
+          background: '#fff3cd',
+          border: '1px solid #ffc107',
+          borderRadius: '8px',
+          padding: '12px',
+          marginTop: '15px'
+        }}>
           <b>⚠️ Занятые даты:</b>
-          <ul>
+          <ul style={{margin: '8px 0', paddingLeft: '20px'}}>
             {bookedDates.map((period, i) => (
-              <li key={i}>{period.check_in} – {period.check_out}</li>
+              <li key={i}>
+                {new Date(period.check_in).toLocaleDateString('ru-RU')} – {new Date(period.check_out).toLocaleDateString('ru-RU')}
+              </li>
             ))}
           </ul>
-          <span style={{color:"#c77d18"}}>Пожалуйста, не выбирайте эти интервалы.</span>
+          <span style={{color: '#856404', fontSize: '0.9em'}}>
+            Пожалуйста, выберите другие даты.
+          </span>
         </div>
       )}
 
       {/* Ошибка */}
       {errorMsg && (
-        <div className="booking-error">{errorMsg}</div>
+        <div className="booking-error" style={{
+          background: '#f8d7da',
+          color: '#721c24',
+          padding: '12px',
+          borderRadius: '8px',
+          marginTop: '10px'
+        }}>
+          {errorMsg}
+        </div>
       )}
 
       {/* Итоговая стоимость */}
       {days > 0 && (
-        <div className="total-price">
-          <p>Количество ночей: {days}</p>
-        </div>
+          <div className="total-price">
+              <p>Количество ночей: {days}</p>
+              <p className="total">Итого: {totalPrice.toLocaleString('ru-RU')} ₽</p>
+          </div>
       )}
 
-      <button
-        type="submit"
-        className="btn btn-primary"
+        <button
+            type="submit"
+            className="btn btn-primary"
         disabled={days <= 0}
       >
         Забронировать

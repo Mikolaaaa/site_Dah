@@ -67,7 +67,6 @@
   export const roomAPI = {
     getAll: () => api.get('/api/rooms'),
     getOne: (id) => api.get(`/api/rooms/${id}`),
-    getBookedDates: (id) => api.get(`/api/rooms/${id}/booked-dates`),
     create: (data) => api.post('/api/rooms', data),
     update: (id, data) => api.patch(`/api/rooms/${id}`, data),
     delete: (id) => api.delete(`/api/rooms/${id}`),
@@ -75,7 +74,8 @@
 
   // Bookings API
   export const bookingAPI = {
-    getAll: (roomId) => api.get('/api/bookings', { params: { room_id: roomId } }),
+    getAll: (roomId) => api.get('/api/bookings'),
+    getBookedDates: () => api.get('/api/bookings/booked-dates'),
     create: (data) => api.post('/api/bookings', data),
     delete: (id) => api.delete(`/api/bookings/${id}`),
     updateStatus: (id, status) => api.patch(`/api/bookings/${id}/status`, null, {

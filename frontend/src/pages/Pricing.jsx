@@ -12,6 +12,7 @@ export default function Pricing() {
             <p>
               Дом сдаётся целиком. Стоимость зависит от количества гостей и выбранных дат.
             </p>
+            <p><strong>6 гостей максимум 🚨</strong></p>
             <Link to="/booking" className="btn-hero-main">
               Забронировать дом
             </Link>
@@ -42,10 +43,6 @@ export default function Pricing() {
                   <td>с 4 по 10 января</td>
                   <td>20 000 ₽</td>
                 </tr>
-                <tr>
-                  <td>6 гостей максимум</td>
-                  <td></td>
-                </tr>
                 </tbody>
               </table>
             </div>
@@ -55,6 +52,27 @@ export default function Pricing() {
             <img src="/images/house-main.jpg" alt="Дом Даховский берег"/>
           </div>
         </section>
+
+         <section className="location-section">
+          <h2>Где мы находимся</h2>
+          <div className="location-content">
+            <div className="location-info">
+              <p className="address">
+                <strong>📍 Адрес:</strong> Республика Адыгея, Майкопский район, станица Даховская, Кубанская 42
+              </p>
+              <p className="contact">
+                <strong>📞 Телефон:</strong> <a href="tel:+79184340808">+7 (918) 434-08-08</a>
+                <strong>📞 Телефон:</strong> <a href="tel:+79184340808">+7 (928) 434-55-16</a>
+              </p>
+            </div>
+            <div className="map-container">
+              <iframe
+                  src="https://yandex.ru/map-widget/v1/?um=constructor%3A607cc2515ad4d92bf7f61dae2478eb5f329143a170fe55b4f99a8c261f84fc46&amp;source=constructor"
+                  width="500" height="400" frameBorder="0">
+              </iframe>
+            </div>
+          </div>
+         </section>
 
         {/* Галерея */}
         <section className="pricing-gallery">

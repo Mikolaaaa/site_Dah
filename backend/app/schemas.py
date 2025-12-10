@@ -64,9 +64,8 @@ class RoomOut(RoomBase):
 # === BOOKING SCHEMAS ===
 
 class BookingBase(BaseModel):
-    room_id: Optional[int] = None
-    guest_name: str = Field(..., min_length=2, max_length=100)
-    guest_phone: str = Field(..., min_length=10, max_length=20)
+    guest_name: str
+    guest_phone: str
     guest_email: Optional[EmailStr] = None
     check_in: datetime
     check_out: datetime

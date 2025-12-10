@@ -155,7 +155,6 @@ export default function Admin() {
                 <p><strong>Гость:</strong> {booking.guest_name}</p>
                 <p><strong>Телефон:</strong> {booking.guest_phone}</p>
                 <p><strong>Email:</strong> {booking.guest_email || '—'}</p>
-                <p><strong>Номер комнаты:</strong> {booking.room_id}</p>
                 <p><strong>Заезд:</strong> {new Date(booking.check_in).toLocaleDateString('ru-RU')}</p>
                 <p><strong>Выезд:</strong> {new Date(booking.check_out).toLocaleDateString('ru-RU')}</p>
                 <p><strong>Гостей:</strong> {booking.guests_count}</p>
